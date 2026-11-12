@@ -6,7 +6,18 @@
         xmlns:local="clr-namespace:groupProject"
         mc:Ignorable="d"
         Title="wndMain" Height="450" Width="800">
-    <Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem x:Name="mnuEdit" Header="_Edit Items" Click="mnuEdit_Click">
+            </MenuItem>
+            <MenuItem x:Name="mnuSearch" Header="_Search Invoices" Click="mnuSearch_Click">
+            </MenuItem>
+        </Menu>
         
-    </Grid>
+        <StackPanel>
+            <Button x:Name="btnNew" Content="New Invoice" Width="100" Height="30" Margin="10" Click="btnNew_Click"/>
+            <Button x:Name="btnEdit" Content="Edit Invoices" Width="100" Height="30" Margin="10" Click="btnEdit_Click"/>
+            <Button x:Name="btnSave" Content="Save Invoices" Width="100" Height="30" Margin="10" Click="btnSave_Click"/>
+        </StackPanel>
+    </DockPanel>
 </Window>
