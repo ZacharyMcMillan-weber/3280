@@ -21,5 +21,13 @@ namespace groupProject.Items
         {
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        //bool bHasItemsBeenChanges;    //Set to true when an item as been added/edited/deleted. Used by main window to know if needs to refresh items list
+        //bool HasItemsBeenChanged;     //Property 
     }
 }
