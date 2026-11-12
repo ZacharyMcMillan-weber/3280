@@ -93,5 +93,20 @@ namespace groupProject
         {
 
         }
+
+        private void btnAddItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDeleteItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cbItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
