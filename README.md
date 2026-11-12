@@ -7,3 +7,7 @@
 	- Seach
 - ### Zachary McMillan
 	- Items
+
+
+- ## Additional Notes
+- Don't forget to add System.Data.OleDb to the NuGet packages for the project to ensure database connectivity.

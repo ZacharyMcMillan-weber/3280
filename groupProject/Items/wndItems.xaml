@@ -1,12 +1,89 @@
 ﻿<Window x:Class="groupProject.Items.wndItems"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:groupProject.Items"
-        mc:Ignorable="d"
-        Title="wndItems" Height="450" Width="800">
-    <Grid>
-        
+        Title="Manage Items"
+        Height="550"
+        Width="800"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Item Entry Fields -->
+        <GroupBox Header="Item Information" Grid.Row="0" Margin="0,0,0,10">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Item Code:" Grid.Row="0" Grid.Column="0"/>
+                <TextBox x:Name="txtItemCode"
+                         Grid.Row="0" Grid.Column="1"
+                         Margin="5"/>
+
+                <Label Content="Cost:" Grid.Row="0" Grid.Column="2"/>
+                <TextBox x:Name="txtCost"
+                         Grid.Row="0" Grid.Column="2"
+                         Margin="50,5,60,5" Grid.ColumnSpan="2"/>
+
+                <Label Content="Description:" Grid.Row="1" Grid.Column="0"/>
+                <TextBox x:Name="txtDescription"
+                         Grid.Row="1" Grid.Column="1"
+                         Grid.ColumnSpan="3"
+                         Margin="5"/>
+            </Grid>
+        </GroupBox>
+
+        <!-- Item DataGrid -->
+        <DataGrid x:Name="dgItems"
+                  Grid.Row="2"
+                  AutoGenerateColumns="True"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  Margin="0,0,0,10"/>
+
+        <!-- Action Buttons -->
+        <StackPanel Grid.Row="3"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
+            <Button x:Name="btnAdd"
+                    Content="Add"
+                    Width="75"
+                    Margin="5"/>
+
+            <Button x:Name="btnEdit"
+                    Content="Edit"
+                    Width="75"
+                    Margin="5"/>
+
+            <Button x:Name="btnDelete"
+                    Content="Delete"
+                    Width="75"
+                    Margin="5"/>
+
+            <Button x:Name="btnSave"
+                    Content="Save"
+                    Width="75"
+                    Margin="5"/>
+
+            <Button x:Name="btnClose"
+                    Content="Close"
+                    Width="75"
+                    Margin="5"/>
+        </StackPanel>
     </Grid>
 </Window>
