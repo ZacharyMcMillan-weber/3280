@@ -12,4 +12,10 @@
     <PackageReference Include="System.Data.OleDb" Version="11.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Invoice.accdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
