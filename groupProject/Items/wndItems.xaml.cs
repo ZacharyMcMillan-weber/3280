@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace groupProject
+namespace groupProject.Items
 {
     /// <summary>
     /// Interaction logic for wndItems.xaml
