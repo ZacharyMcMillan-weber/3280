@@ -14,23 +14,25 @@ using System.Reflection;
         /// </summary>
         private string sConnectionString;
 
-        /// <summary>
-        /// Constructor that sets the connection string to the database
-        /// </summary>
-		public clsDataAccess()
-		{
-            sConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data source= " + Directory.GetCurrentDirectory() + "\\Solution Items\\Invoices.mdb";
-		}
-
-        /// <summary>
-        /// This method takes an SQL statment that is passed in and executes it.  The resulting values
-        /// are returned in a DataSet.  The number of rows returned from the query will be put into
-        /// the reference parameter iRetVal.
-        /// </summary>
-        /// <param name="sSQL">The SQL statement to be executed.</param>
-        /// <param name="iRetVal">Reference parameter that returns the number of selected rows.</param>
-        /// <returns>Returns a DataSet that contains the data from the SQL statement.</returns>
-		public DataSet ExecuteSQLStatement(string sSQL, ref int iRetVal)
+    /// <summary>
+    /// Constructor that sets the connection string to the database
+    /// </summary>
+    public clsDataAccess()
+    {
+        sConnectionString =
+            @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+            Directory.GetCurrentDirectory() +
+            "\\Invoice.accdb;";
+    }
+    /// <summary>
+    /// This method takes an SQL statment that is passed in and executes it.  The resulting values
+    /// are returned in a DataSet.  The number of rows returned from the query will be put into
+    /// the reference parameter iRetVal.
+    /// </summary>
+    /// <param name="sSQL">The SQL statement to be executed.</param>
+    /// <param name="iRetVal">Reference parameter that returns the number of selected rows.</param>
+    /// <returns>Returns a DataSet that contains the data from the SQL statement.</returns>
+    public DataSet ExecuteSQLStatement(string sSQL, ref int iRetVal)
 		{
 			try
 			{
