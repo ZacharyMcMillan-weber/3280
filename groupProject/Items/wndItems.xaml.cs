@@ -46,14 +46,11 @@ namespace groupProject.Items
         {
             if (dgItems.SelectedItem != null)
             {
-                if (dgItems.SelectedItem != null)
-                {
-                    clsItems selectedItem = (clsItems)dgItems.SelectedItem;
+                clsItems selectedItem = (clsItems)dgItems.SelectedItem;
 
-                    txtItemCode.Text = selectedItem.ItemCode;
-                    txtDescription.Text = selectedItem.ItemDesc;
-                    txtCost.Text = selectedItem.Cost.ToString();
-                }
+                txtItemCode.Text = selectedItem.ItemCode;
+                txtDescription.Text = selectedItem.ItemDesc;
+                txtCost.Text = selectedItem.Cost.ToString();
             }
         }
 
