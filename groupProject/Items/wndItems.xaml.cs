@@ -231,5 +231,10 @@ namespace groupProject.Items
                 MessageBox.Show("Unable to delete item: " + ex.Message);
             }
         }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

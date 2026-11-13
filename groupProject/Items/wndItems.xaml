@@ -87,7 +87,8 @@
             <Button x:Name="btnClose"
                     Content="Close"
                     Width="75"
-                    Margin="5"/>
+                    Margin="5"
+                    Click="btnClose_Click"/>
         </StackPanel>
     </Grid>
 </Window>
