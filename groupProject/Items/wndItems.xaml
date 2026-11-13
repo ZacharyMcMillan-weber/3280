@@ -63,7 +63,8 @@
             <Button x:Name="btnAdd"
                     Content="Add"
                     Width="75"
-                    Margin="5"/>
+                    Margin="5"
+                    Click="btnAdd_Click"/>
 
             <Button x:Name="btnEdit"
                     Content="Edit"
@@ -78,7 +79,8 @@
             <Button x:Name="btnSave"
                     Content="Save"
                     Width="75"
-                    Margin="5"/>
+                    Margin="5"
+                    Click="btnSave_Click"/>
 
             <Button x:Name="btnClose"
                     Content="Close"

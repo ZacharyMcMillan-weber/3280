@@ -66,5 +66,76 @@ namespace groupProject.Items
             dgItems.ItemsSource = lstItems;
         }
 
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+            bAddingNewitem = true; //Set to true to indicate we are adding a new item
+            // clear the fields for a new item
+            txtItemCode.Clear();
+            txtDescription.Clear();
+            txtCost.Clear();
+
+            // clear current data grid selection
+            dgItems.SelectedItem = null;
+
+            // set focus to the item code field
+            txtItemCode.Focus();
+        }
+
+        private bool bAddingNewitem = false; //Tracks whether we are adding a new item or editing an existing one
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            //Only handle new items
+            if (bAddingNewitem)
+            {
+                // ensure all textboxes contain data
+                if (string.IsNullOrWhiteSpace(txtCost.Text) ||
+                    string.IsNullOrWhiteSpace(txtDescription.Text) ||
+                    string.IsNullOrWhiteSpace(txtItemCode.Text))
+                 {
+                    MessageBox.Show("Please fill in all fields.");
+                    return;
+                }
+
+                // validate cost 
+                if (!decimal.TryParse(txtCost.Text, out decimal cost))
+                {
+                    MessageBox.Show("Please enter a valid cost.");
+                    return;
+                }
+
+                // create new clsitem using user inputs
+                clsItems newItem = new clsItems
+                {
+                    ItemCode = txtItemCode.Text.Trim(),
+                    ItemDesc = txtDescription.Text.Trim(),
+                    Cost = cost
+                };
+
+                // try to add the new item to the database
+                try
+                {
+                    logic.AddItem(newItem);
+
+                    HasItemsBeenChanged = true;
+
+                    loadItems();
+
+                    bAddingNewitem = false;
+
+                    txtItemCode.Clear();
+                    txtDescription.Clear();
+                    txtCost.Clear();
+
+                    MessageBox.Show("Item has been successfully added.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error adding item: " + ex.Message);
+                }
+            }
+        }
+
     }
 }
