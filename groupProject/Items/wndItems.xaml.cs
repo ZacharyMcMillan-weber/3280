@@ -67,6 +67,8 @@ namespace groupProject.Items
         {
 
             bAddingNewitem = true; //Set to true to indicate we are adding a new item
+            bEditingExistingitem = false; //Set to false to indicate we are not editing an existing item
+            clsOldItem = null;
             // clear the fields for a new item
             txtItemCode.Clear();
             txtDescription.Clear();
@@ -210,7 +212,13 @@ namespace groupProject.Items
                     // Refresh the DataGrid
                     loadItems();
 
-                    // Clear the TextBoxes
+                    // reset flags
+                    bAddingNewitem = false;
+                    bEditingExistingitem = false;
+                    clsOldItem = null;
+
+                    //clear text boxes
+                    dgItems.SelectedItem = null;
                     txtItemCode.Clear();
                     txtDescription.Clear();
                     txtCost.Clear();
