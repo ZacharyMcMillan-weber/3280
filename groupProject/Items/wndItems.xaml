@@ -69,12 +69,14 @@
             <Button x:Name="btnEdit"
                     Content="Edit"
                     Width="75"
-                    Margin="5"/>
+                    Margin="5"
+                    Click="btnEdit_Click"/>
 
             <Button x:Name="btnDelete"
                     Content="Delete"
                     Width="75"
-                    Margin="5"/>
+                    Margin="5"
+                    Click="btnDelete_Click"/>
 
             <Button x:Name="btnSave"
                     Content="Save"

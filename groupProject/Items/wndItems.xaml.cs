@@ -86,26 +86,25 @@ namespace groupProject.Items
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            //Only handle new items
-            if (bAddingNewitem)
+            // Make sure all fields contain information
+            if (string.IsNullOrWhiteSpace(txtItemCode.Text) ||
+                string.IsNullOrWhiteSpace(txtDescription.Text) ||
+                string.IsNullOrWhiteSpace(txtCost.Text))
             {
-                // ensure all textboxes contain data
-                if (string.IsNullOrWhiteSpace(txtCost.Text) ||
-                    string.IsNullOrWhiteSpace(txtDescription.Text) ||
-                    string.IsNullOrWhiteSpace(txtItemCode.Text))
-                 {
-                    MessageBox.Show("Please fill in all fields.");
-                    return;
-                }
+                MessageBox.Show("Please fill in all fields.");
+                return;
+            }
 
-                // validate cost 
-                if (!decimal.TryParse(txtCost.Text, out decimal cost))
-                {
-                    MessageBox.Show("Please enter a valid cost.");
-                    return;
-                }
+            // Make sure Cost is a valid number
+            if (!decimal.TryParse(txtCost.Text, out decimal cost))
+            {
+                MessageBox.Show("Please enter a valid cost.");
+                return;
+            }
 
-                // create new clsitem using user inputs
+            try
+            {
+                // Create an item using the information in the TextBoxes
                 clsItems newItem = new clsItems
                 {
                     ItemCode = txtItemCode.Text.Trim(),
@@ -113,29 +112,119 @@ namespace groupProject.Items
                     Cost = cost
                 };
 
-                // try to add the new item to the database
-                try
+                // Handle adding a new item
+                if (bAddingNewitem)
                 {
                     logic.AddItem(newItem);
+                }
+                // Handle editing an existing item
+                else if (bEditingExistingitem)
+                {
+                    logic.EditItem(clsOldItem, newItem);
+                }
+                else
+                {
+                    MessageBox.Show("Please select Add or Edit before saving.");
+                    return;
+                }
 
+                // Indicate that the Items list has changed
+                HasItemsBeenChanged = true;
+
+                // Refresh the DataGrid
+                loadItems();
+
+                // Reset the operation flags
+                bAddingNewitem = false;
+                bEditingExistingitem = false;
+
+                // Clear the fields
+                txtItemCode.Clear();
+                txtDescription.Clear();
+                txtCost.Clear();
+
+                MessageBox.Show("Item saved successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to save item: " + ex.Message);
+            }
+        }
+        private bool bEditingExistingitem = false; //Tracks whether we are editing an existing item
+        private clsItems clsOldItem;
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgItems.SelectedItem == null)
+            {
+                MessageBox.Show("Please select an item to edit.");
+                return;
+            }
+
+            // Store the original item
+            clsOldItem = (clsItems)dgItems.SelectedItem;
+
+            // Indicate that we are editing
+            bEditingExistingitem     = true;
+            bAddingNewitem = false;
+
+            // Populate the fields
+            txtItemCode.Text = clsOldItem.ItemCode;
+            txtDescription.Text = clsOldItem.ItemDesc;
+            txtCost.Text = clsOldItem.Cost.ToString();
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            // Make sure an item is selected
+            if (dgItems.SelectedItem == null)
+            {
+                MessageBox.Show("Please select an item to delete.");
+                return;
+            }
+
+            // Get the selected item
+            clsItems selectedItem = (clsItems)dgItems.SelectedItem;
+
+            try
+            {
+                // Check whether the item is used on an invoice
+                if (logic.IsItemOnInvoice(selectedItem))
+                {
+                    MessageBox.Show(
+                        "This item cannot be deleted because it is used on an invoice.");
+                    return;
+                }
+
+                // Confirm deletion
+                MessageBoxResult result = MessageBox.Show(
+                    "Are you sure you want to delete this item?",
+                    "Confirm Delete",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    // Delete the item
+                    logic.DeleteItem(selectedItem);
+
+                    // Mark that the Items list has changed
                     HasItemsBeenChanged = true;
 
+                    // Refresh the DataGrid
                     loadItems();
 
-                    bAddingNewitem = false;
-
+                    // Clear the TextBoxes
                     txtItemCode.Clear();
                     txtDescription.Clear();
                     txtCost.Clear();
 
-                    MessageBox.Show("Item has been successfully added.");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error adding item: " + ex.Message);
+                    MessageBox.Show("Item deleted successfully.");
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to delete item: " + ex.Message);
+            }
         }
-
     }
 }
