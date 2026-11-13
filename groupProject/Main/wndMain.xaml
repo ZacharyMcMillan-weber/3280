@@ -5,8 +5,87 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:groupProject"
         mc:Ignorable="d"
-        Title="wndMain" Height="450" Width="800">
-    <Grid>
+        Title="We Need to Decide on a Company to Put Here" Height="450" Width="800">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
         
-    </Grid>
+        <Style x:Key="BaseControl" TargetType="Control">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="TextBox" BasedOn="{StaticResource BaseControl}">
+            <Setter Property="Width" Value="100"/>
+        </Style>
+        
+        <Style TargetType="ComboBox" BasedOn="{StaticResource BaseControl}">
+            <Setter Property="Width" Value="100"/>
+        </Style>
+        
+        <Style TargetType="Label" BasedOn="{StaticResource BaseControl}">
+            <Setter Property="Width" Value="100"/>
+        </Style>
+        
+        <Style TargetType="DatePicker" BasedOn="{StaticResource BaseControl}">
+            <Setter Property="Width" Value="120"/>
+        </Style>
+
+        <Style x:Key="MainGrid" TargetType="Grid">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem x:Name="mnuEdit" Header="_Edit Items" Click="mnuEdit_Click">
+            </MenuItem>
+            <MenuItem x:Name="mnuSearch" Header="_Search Invoices" Click="mnuSearch_Click">
+            </MenuItem>
+        </Menu>
+        
+        <Grid Style="{StaticResource MainGrid}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <Button x:Name="btnNew" Content="New Invoice" Click="btnNew_Click"/>
+                <Button x:Name="btnEdit" Content="Edit Invoice" Click="btnEdit_Click"/>
+                <Button x:Name="btnSave" Content="Save Invoice" Click="btnSave_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <Label Content="Invoice Number:" />
+                <Label x:Name="lblInvoiceNumber" Content="TBD" />
+                <Label Content="Invoice Date:" />
+                <DatePicker x:Name="dpInvoiceDate" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <Label Content="Item:" />
+                <ComboBox x:Name="cbItems" DisplayMemberPath="ItemDesc" SelectedValuePath="ItemCode"  SelectionChanged="cbItems_SelectionChanged"/>
+                <Label Content="Cost:" />
+                <TextBox x:Name="txtCost" Width="100"  IsReadOnly="True"/>
+                <Button x:Name="btnAddItem" Content="Add Item" Click="btnAddItem_Click"/>
+            </StackPanel>
+            <DataGrid x:Name="dgLineItems" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="3">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Code" Binding="{Binding ItemCode}"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding ItemDesc}" Width="*"/>
+                    <DataGridTextColumn Header="Cost" Binding="{Binding Cost, StringFormat=C}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DockPanel Grid.Row="4" LastChildFill="False">
+                <Button x:Name="btnDeleteItem" Content="Delete Item" Click="btnDeleteItem_Click" DockPanel.Dock="Left"/>
+                <TextBox x:Name="txtTotal" Width="100"  IsReadOnly="True" DockPanel.Dock="Right"/>
+                <Label Content="Total:" DockPanel.Dock="Right"/>
+            </DockPanel>
+        </Grid>
+    </DockPanel>
 </Window>
