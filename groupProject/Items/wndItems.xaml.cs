@@ -41,7 +41,11 @@ namespace groupProject.Items
 
             loadItems();
         }
-
+        /// <summary>
+        /// checks to see if the textboxes have been filled with data or not and sets them to variables
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dgItems.SelectedItem != null)
@@ -55,14 +59,20 @@ namespace groupProject.Items
         }
 
         private clsItemsLogic logic = new clsItemsLogic();
-
+        /// <summary>
+        /// load all items from db into a list
+        /// </summary>
         private void loadItems()
         {
             List<clsItems> lstItems = logic.GetAllItems();
 
             dgItems.ItemsSource = lstItems;
         }
-
+        /// <summary>
+        /// verify that we are adding a new item , check textboxes for new data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
 
@@ -82,7 +92,11 @@ namespace groupProject.Items
         }
 
         private bool bAddingNewitem = false; //Tracks whether we are adding a new item or editing an existing one
-
+        /// <summary>
+        /// on click check to make sure textboxes are not null, verify data is appropriate and try to send into db
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             // Make sure all fields contain information
@@ -151,6 +165,11 @@ namespace groupProject.Items
         }
         private bool bEditingExistingitem = false; //Tracks whether we are editing an existing item
         private clsItems clsOldItem;
+        /// <summary>
+        /// set status to updating existing item, set item values to whatever is in the textboxes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             if (dgItems.SelectedItem == null)
@@ -172,6 +191,11 @@ namespace groupProject.Items
             txtCost.Text = clsOldItem.Cost.ToString();
         }
 
+        /// <summary>
+        /// make sure item in field is selected. Confirm user choice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             // Make sure an item is selected
@@ -231,7 +255,11 @@ namespace groupProject.Items
                 MessageBox.Show("Unable to delete item: " + ex.Message);
             }
         }
-
+        /// <summary>
+        /// close item window and return to main window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
