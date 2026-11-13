@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Printing;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using groupProject.Common;
 
 namespace groupProject.Items
 {
@@ -36,15 +38,33 @@ namespace groupProject.Items
             InitializeComponent();
 
             dgItems.SelectionChanged += dgItems_SelectionChanged;
+
+            loadItems();
         }
 
         private void dgItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dgItems.SelectedItem != null)
             {
-                // Selected item information will populate
-                // the TextBoxes after we connect the database.
+                if (dgItems.SelectedItem != null)
+                {
+                    clsItems selectedItem = (clsItems)dgItems.SelectedItem;
+
+                    txtItemCode.Text = selectedItem.ItemCode;
+                    txtDescription.Text = selectedItem.ItemDesc;
+                    txtCost.Text = selectedItem.Cost.ToString();
+                }
             }
         }
+
+        private clsItemsLogic logic = new clsItemsLogic();
+
+        private void loadItems()
+        {
+            List<clsItems> lstItems = logic.GetAllItems();
+
+            dgItems.ItemsSource = lstItems;
+        }
+
     }
 }
