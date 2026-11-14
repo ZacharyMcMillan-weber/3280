@@ -28,25 +28,39 @@ namespace groupProject.Items
 
             return lstItems;
         }
-        //AddItem(clsItems)
+        /// <summary>
+        /// add new item 
+        /// </summary>
+        /// <param name="clsNewItem"></param>
         public void AddItem(clsItems clsNewItem)
         {
             //Add new item to database
             db.ExecuteNonQuery(sql.AddItem(clsNewItem));
         }
-        //EditItem(clsItems clsOldItem, clsItems clsNewItem)
+        /// <summary>
+        /// edit either existing or new item 
+        /// </summary>
+        /// <param name="clsOldItem"></param>
+        /// <param name="clsNewItem"></param>
         public void EditItem(clsItems clsOldItem, clsItems clsNewItem)
         {
             //Edit item in database
             db.ExecuteNonQuery(sql.EditItem(clsOldItem, clsNewItem));
         }
-        //DeleteItem(clsItems clsItemToDelete)
+        /// <summary>
+        /// delte selected item
+        /// </summary>
+        /// <param name="clsItemToDelete"></param>
         public void DeleteItem(clsItems clsItemToDelete)
         {
             //Delete item from database
             db.ExecuteNonQuery(sql.DeleteItem(clsItemToDelete));
         }
-        //IsItemOnInvoice(clsItems)
+        /// <summary>
+        /// check to see if item is on an invoice or not
+        /// </summary>
+        /// <param name="clsItemToCheck"></param>
+        /// <returns></returns>
         public bool IsItemOnInvoice(clsItems clsItemToCheck)
         {
             //Check if item is on any invoice
