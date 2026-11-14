@@ -6,7 +6,36 @@
         xmlns:local="clr-namespace:groupProject"
         mc:Ignorable="d"
         Title="wndSearch" Height="450" Width="800">
-    <Grid>
-        
+    
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+            <StackPanel Margin="0,0,12,0">
+                <Label Content="Invoice Number"/>
+                <ComboBox x:Name="cboDropdown1" Width="150"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,12,0">
+                <Label Content="Invoice Date"/>
+                <ComboBox x:Name="cboDropdown2" Width="150"/>
+            </StackPanel>
+
+            <StackPanel>
+                <Label Content="Total Cost"/>
+                <ComboBox x:Name="cboDropdown3" Width="150"/>
+            </StackPanel>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" x:Name="dgInvoices" IsReadOnly="True" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow"/>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button x:Name="btnSelect" Content="Select" Width="80" Margin="0,0,8,0" Click="btnSelect_Click"/>
+            <Button x:Name="btnCancel" Content="Cancel" Width="80" Click="btnCancel_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
