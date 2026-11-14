@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
 
 namespace groupProject.Search
 {
@@ -9,12 +10,34 @@ namespace groupProject.Search
     /// </summary>
     internal class clsSearchLogic
     {
-        //--outline--
+        private readonly clsDataAccess dataAccess = new clsDataAccess();
+        private readonly clsSearchSQL searchSQL = new clsSearchSQL();
 
-        // Load the data for the 3 dropdowns
-        // Use sql queries and database class
+        public DataTable GetAllInvoices()
+        {
+            return RunQuery(searchSQL.SelectAllInvoices());
+        }
 
-        // When a dropdown selection change, Update to the invoice shown
-        // When all filters are cleared, load all invoices
+        public DataTable GetInvoiceNumbers()
+        {
+            return RunQuery(searchSQL.SelectInvoiceNumbers());
+        }
+
+        public DataTable GetInvoiceDates()
+        {
+            return RunQuery(searchSQL.SelectInvoiceDates());
+        }
+
+        public DataTable GetInvoiceTotals()
+        {
+            return RunQuery(searchSQL.SelectInvoiceTotals());
+        }
+
+        private DataTable RunQuery(string sql)
+        {
+            int rowCount = 0;
+            DataSet results = dataAccess.ExecuteSQLStatement(sql, ref rowCount);
+            return results.Tables[0];
+        }
     }
 }

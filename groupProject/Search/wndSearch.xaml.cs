@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using groupProject.Search;
 
 namespace groupProject
 {
@@ -17,9 +18,23 @@ namespace groupProject
     /// </summary>
     public partial class wndSearch : Window
     {
+        private readonly clsSearchLogic searchLogic = new clsSearchLogic();
+
+        /// <summary>
+        /// Initializes the window and loads the invoices.
+        /// </summary>
         public wndSearch()
         {
             InitializeComponent();
+
+            try
+            {
+                dgInvoices.ItemsSource = searchLogic.GetAllInvoices().DefaultView;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Could not load invoices");
+            }
         }
 
 

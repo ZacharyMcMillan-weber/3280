@@ -3,11 +3,12 @@ using System.Data;
 using System.Data.OleDb;
 using System.IO;
 using System.Reflection;
+using groupProject.Search;
 
-    /// <summary>
-    /// Class used to access the database.
-    /// </summary>
-	public class clsDataAccess
+/// <summary>
+/// Class used to access the database.
+/// </summary>
+public class clsDataAccess
 	{
         /// <summary>
         /// Connection string to the database.
@@ -17,10 +18,11 @@ using System.Reflection;
         /// <summary>
         /// Constructor that sets the connection string to the database
         /// </summary>
-		public clsDataAccess()
-		{
-            sConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data source= " + Directory.GetCurrentDirectory() + "\\Solution Items\\Invoices.mdb";
-		}
+        public clsDataAccess()
+        {
+            sConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+                                Directory.GetCurrentDirectory() + "\\Invoice.accdb";
+        }
 
         /// <summary>
         /// This method takes an SQL statment that is passed in and executes it.  The resulting values
