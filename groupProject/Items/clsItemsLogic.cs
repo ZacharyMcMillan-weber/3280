@@ -5,10 +5,13 @@ namespace groupProject.Items
 {
     public class clsItemsLogic
     {
-        private clsItemsSQL sql = new clsItemsSQL();
-        private clsDataAccess db = new clsDataAccess();
+        private clsItemsSQL sql = new clsItemsSQL(); // sql statements
+        private clsDataAccess db = new clsDataAccess(); //db statements
 
-        //GetAllItems returns List<clsItems> of all items in the database
+        /// <summary>
+        /// take all db items and put them into a list keeping each one as an object
+        /// </summary>
+        /// <returns></returns>
         public List<clsItems> GetAllItems()
         {
             List<clsItems> lstItems = new List<clsItems>();
